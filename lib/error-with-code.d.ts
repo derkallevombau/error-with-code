@@ -13,19 +13,19 @@ export interface ErrorOptions {
  * Sets options for `error(message: string)` and `error(message: string, code: string)`.\
  * @param options -
  */
-export default function error(options: ErrorOptions): void;
+export declare function error(options: ErrorOptions): void;
 /**
  * Throws an `Error` object constructed
  * with `message` and `code` property set to provided code.
  * @param message - Error message
  * @param code - Error code
  */
-export default function error(message: string, code: string): void;
+export declare function error(message: string, code: string): void;
 /**
  * Throws an `Error` object constructed
  * with `message` and `code` property set to code
  * defined via `error({ code: <code> })`.
  * @param message - Error message
  */
-export default function error(message: string): void;
+export declare function error(message: string): void;
 //# sourceMappingURL=error-with-code.d.ts.map
