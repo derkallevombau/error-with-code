@@ -24,7 +24,7 @@ export interface ErrorOptions
  * Sets options for `error(message: string)` and `error(message: string, code: string)`.\
  * @param options -
  */
-export default function error(options: ErrorOptions): void;
+export function error(options: ErrorOptions): void;
 
 /**
  * Throws an `Error` object constructed
@@ -32,7 +32,7 @@ export default function error(options: ErrorOptions): void;
  * @param message - Error message
  * @param code - Error code
  */
-export default function error(message: string, code: string): void;
+export function error(message: string, code: string): void;
 
 /**
  * Throws an `Error` object constructed
@@ -40,9 +40,9 @@ export default function error(message: string, code: string): void;
  * defined via `error({ code: <code> })`.
  * @param message - Error message
  */
-export default function error(message: string): void;
+export function error(message: string): void;
 
-export default function error(...args: (ErrorOptions | string)[]): void
+export function error(...args: (ErrorOptions | string)[]): void
 {
 	switch (args.length)
 	{
