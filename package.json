@@ -1,0 +1,50 @@
+{
+	"name": "error-with-code",
+	"version": "0.1.0",
+	"description": "Easily throw an error with code. The code may be provided on invocation or preset to be used for all invocations. Furthermore, you may set a string that will be prepended to each error message.",
+	"main": "lib/error-with-code.js",
+	"types": "lib/error-with-code.d.ts",
+	"files": [
+		"lib"
+	],
+	"author": "derkallevombau",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/derkallevombau/error-with-code.git"
+	},
+	"bugs": {
+		"url": "https://github.com/derkallevombau/error-with-code/issues"
+	},
+	"homepage": "https://derkallevombau.github.io/error-with-code/",
+	"keywords": [
+		"Throw",
+		"Error",
+		"Code"
+	],
+	"config": {
+		"outDir": "lib",
+		"lintCfgSubtreeRepoBasePath": "~/VS-Code-Projects/linter-configs/"
+	},
+	"scripts": {
+		"generateJs": "tsc -p ./ --outDir \"$npm_package_config_outDir\" --removeComments true --declaration false --declarationMap false",
+		"generateDts": "tsc -p ./ --outDir \"$npm_package_config_outDir\" --emitDeclarationOnly true",
+		"compile": "npm run generateJs && npm run generateDts && npm run generateDoc",
+		"watch": "tsc --watch -p ./ --noEmitOnError false",
+		"lint": "eslint --ext .ts src",
+		"generateDoc": "typedoc --options typedoc.js --inputFiles src && touch docs/.nojekyll",
+		"lintCfgTsAdd": "git subtree add -P lintcfg-ts --squash \"$npm_package_config_lintCfgSubtreeRepoBasePath\"ts master && ln -s lintcfg-ts/.eslintrc.js .eslintrc.js",
+		"lintCfgTsPush": "git subtree push -P lintcfg-ts \"$npm_package_config_lintCfgSubtreeRepoBasePath\"ts master",
+		"lintCfgTsPull": "git subtree pull -P lintcfg-ts --squash \"$npm_package_config_lintCfgSubtreeRepoBasePath\"ts master",
+		"regenerateDeps": "x=package-lock.json; y=node_modules; [ -f $x ] && rm $x; [ -d $y ] && rm -r $y; npm i"
+	},
+	"devDependencies": {
+		"@types/node": "^14.14.36",
+		"@typescript-eslint/eslint-plugin": "^4.19.0",
+		"@typescript-eslint/parser": "^4.19.0",
+		"eslint": "^7.22.0",
+		"eslint-plugin-tsdoc": "^0.2.11",
+		"typedoc": "0.17.7",
+		"typescript": "^4.2.3"
+	}
+}
