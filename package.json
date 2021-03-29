@@ -23,12 +23,11 @@
 		"Code"
 	],
 	"config": {
-		"outDir": "lib",
 		"lintCfgSubtreeRepoBasePath": "~/VS-Code-Projects/linter-configs/"
 	},
 	"scripts": {
-		"generateJs": "tsc -p ./ --outDir \"$npm_package_config_outDir\" --removeComments true --declaration false --declarationMap false",
-		"generateDts": "tsc -p ./ --outDir \"$npm_package_config_outDir\" --emitDeclarationOnly true",
+		"generateJs": "tsc -p ./ --removeComments true --declaration false --declarationMap false",
+		"generateDts": "tsc -p ./ --emitDeclarationOnly true",
 		"compile": "npm run generateJs && npm run generateDts && npm run generateDoc",
 		"watch": "tsc --watch -p ./ --noEmitOnError false",
 		"lint": "eslint --ext .ts src",
