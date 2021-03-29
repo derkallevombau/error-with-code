@@ -2,10 +2,10 @@
 	"name": "error-with-code",
 	"version": "0.1.0",
 	"description": "Easily throw an error with code. The code may be provided on invocation or preset to be used for all invocations. Furthermore, you may set a string that will be prepended to each error message.",
-	"main": "lib/error-with-code.js",
-	"types": "lib/error-with-code.d.ts",
+	"main": "dist/lib/error-with-code.js",
+	"types": "dist/lib/error-with-code.d.ts",
 	"files": [
-		"lib"
+		"dist"
 	],
 	"author": "derkallevombau",
 	"license": "MIT",
