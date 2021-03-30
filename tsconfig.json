@@ -25,6 +25,7 @@
 		"strictBindCallApply": true,
 		"rootDir": "src",
 		"outDir": "dist",
+		"sourceRoot": "../../error-with-code/src/",
 		"composite": true
     }
 }
