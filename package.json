@@ -23,7 +23,7 @@
 		"Code"
 	],
 	"config": {
-		"lintCfgSubtreeRepoBasePath": "~/VS-Code-Projects/linter-configs/"
+		"lintCfgSubtreeRepoBasePath": "git@github.com:derkallevombau/lintcfg-ts"
 	},
 	"scripts": {
 		"generateJs": "tsc -p ./ --composite false --removeComments true --declaration false --declarationMap false",
@@ -32,9 +32,9 @@
 		"watch": "tsc --watch -p ./ --noEmitOnError false",
 		"lint": "eslint --ext .ts src",
 		"generateDoc": "typedoc --options typedoc.js --inputFiles src && touch docs/.nojekyll",
-		"lintCfgTsAdd": "git subtree add -P lintcfg-ts --squash \"$npm_package_config_lintCfgSubtreeRepoBasePath\"ts master && ln -s lintcfg-ts/.eslintrc.js .eslintrc.js",
-		"lintCfgTsPush": "git subtree push -P lintcfg-ts \"$npm_package_config_lintCfgSubtreeRepoBasePath\"ts master",
-		"lintCfgTsPull": "git subtree pull -P lintcfg-ts --squash \"$npm_package_config_lintCfgSubtreeRepoBasePath\"ts master",
+		"lintCfgAdd": "git subtree add -P lintcfg-ts --squash \"$npm_package_config_lintCfgSubtreeRepoBasePath\" master && ln -s lintcfg-ts/.eslintrc.js .eslintrc.js",
+		"lintCfgPush": "git subtree push -P lintcfg-ts \"$npm_package_config_lintCfgSubtreeRepoBasePath\" master",
+		"lintCfgPull": "git subtree pull -P lintcfg-ts --squash \"$npm_package_config_lintCfgSubtreeRepoBasePath\" master",
 		"regenerateDeps": "x=package-lock.json; y=node_modules; [ -f $x ] && rm $x; [ -d $y ] && rm -r $y; npm i"
 	},
 	"devDependencies": {
