@@ -26,7 +26,7 @@
 		"lintCfgSubtreeRepoBasePath": "~/VS-Code-Projects/linter-configs/"
 	},
 	"scripts": {
-		"generateJs": "tsc -p ./ --removeComments true --declaration false --declarationMap false",
+		"generateJs": "tsc -p ./ --composite false --removeComments true --declaration false --declarationMap false",
 		"generateDts": "tsc -p ./ --emitDeclarationOnly true",
 		"compile": "npm run generateJs && npm run generateDts && npm run generateDoc",
 		"watch": "tsc --watch -p ./ --noEmitOnError false",
