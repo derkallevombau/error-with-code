@@ -11,7 +11,7 @@ function getCallStack(): NodeJS.CallSite[]
 	const prepareStackTraceOrg = Error.prepareStackTrace;
 	const err = new Error();
 
-	Error.prepareStackTrace = (_, stack) => { return stack; };
+	Error.prepareStackTrace = (_, stack) => stack;
 
 	// err.stack's declared type is string, no idea why...
 	const stack = err.stack as unknown as NodeJS.CallSite[];
