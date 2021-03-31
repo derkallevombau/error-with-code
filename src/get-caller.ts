@@ -21,29 +21,89 @@ function getCallStack(): NodeJS.CallSite[]
 	return stack;
 }
 
-function getCallerCallSite(): NodeJS.CallSite
+function getCallerCallSite(Index: number): NodeJS.CallSite
 {
-	return getCallStack()[2];
+	return getCallStack()[Index];
 }
 
-/** @ignore */
-export function getCallerFileName(): string
+// 0: getCallStack
+// 1: getCallerCallSite
+// 2: getCallerXXXName
+// 3: caller of getCallerXXXName
+// 4: caller of caller of getCallerXXXName => This is what you normally want.
+/**
+ * @param goBackBy - Omit this if you call this function
+ * directly from the function you want to get the caller of.\
+ * But if you call this function via a helper function,
+ * you must provide a value of 1 to get the right caller.\
+ * Generally speaking, the value must be the number of
+ * "concatenated" helper functions you use.
+ * @returns The file name of the caller.
+ * @ignore
+ */
+export function getCallerFileName(goBackBy?: number): string
 {
-	return getCallerCallSite().getFileName();
+	let i = 4;
+
+	if (goBackBy) i += goBackBy;
+
+	return getCallerCallSite(i).getFileName();
 }
 
-/** @ignore */
-export function getCallerFunctionName(): string
+/**
+ * @param goBackBy - Omit this if you call this function
+ * directly from the function you want to get the caller of.\
+ * But if you call this function via a helper function,
+ * you must provide a value of 1 to get the right caller.\
+ * Generally speaking, the value must be the number of
+ * "concatenated" helper functions you use.
+ * @returns The function name of the caller.
+ * @ignore
+ */
+ export function getCallerFunctionName(goBackBy?: number): string
 {
-	return getCallerCallSite().getFunctionName();
+	let i = 4;
+
+	if (goBackBy) i += goBackBy;
+
+	return getCallerCallSite(i).getFunctionName();
 }
 
-/** @ignore */
-export function printStackTrace(): void
+/**
+ * @param goBackBy - Omit this if you call this function
+ * directly from the function you want to get the caller of.\
+ * But if you call this function via a helper function,
+ * you must provide a value of 1 to get the right caller.\
+ * Generally speaking, the value must be the number of
+ * "concatenated" helper functions you use.
+ * @returns The type (class) name of the caller.
+ * @ignore
+ */
+ export function getCallerTypeName(goBackBy?: number): string
 {
-	const stack = getCallStack();
+	let i = 4;
 
-	let i = 0;
+	if (goBackBy) i += goBackBy;
+
+	return getCallerCallSite(i).getTypeName();
+}
+
+// 0: getCallStack
+// 1: printStackTrace
+// 2: caller of printStackTrace
+/**
+ * @param goBackBy - By default, the caller of this function is included.
+ * To exclude it, provide a value of -1.
+ */
+export function printStackTrace(goBackBy?: number): void
+{
+	let i = 2;
+
+	if (goBackBy) i += goBackBy;
+
+	const stack = getCallStack().slice(i);
+
+	i = 0;
 
 	while (stack.length)
 	{
