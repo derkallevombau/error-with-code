@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
 * error-with-code.ts
 * Author: derkallevombau
@@ -129,6 +131,30 @@ export function error(...args: (ErrorOptions | string)[]): void
 		if (options.messagePrefix) message = options.messagePrefix + ' ' + message;
 
 		const e = new Error(message) as ErrorWithCode;
+
+		// Remove the two call sites that belong to our module
+		// (functions throwError and error) from call stack.
+
+		// Sadly, this doesn't work since Error.prepareStackTrace === undefined.
+
+		// const prepareStackTraceOrg = Error.prepareStackTrace;
+
+		// // Just set a function that calls the original function,
+		// // passing err and the stack array reduced by the first two elements.
+		// Error.prepareStackTrace = (err, stack) => prepareStackTraceOrg(err, stack.slice(2)) as string;
+
+		// e.stack;
+
+		// Error.prepareStackTrace = prepareStackTraceOrg;
+
+		const stackTraceString = e.stack;
+
+		// Save the first line ("Error: <message>"), ...
+		const firstLine = /[^\n]+\n/.exec(stackTraceString)[0];
+
+		// ... remove the first three lines and prepend the first line.
+		e.stack = firstLine + stackTraceString.replace(/^(?:[^\n]+\n){3}/, '');
+
 
 		if (code) e.code = code; // This must be checked first because a code provided via overload 2 takes precedence over a code set via overload 1, if any.
 		else if (options.code) e.code = options.code;
